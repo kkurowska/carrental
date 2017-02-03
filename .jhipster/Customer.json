@@ -10,13 +10,6 @@
             ]
         },
         {
-            "fieldName": "surname",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "id_card_no",
             "fieldType": "String",
             "fieldValidateRules": [

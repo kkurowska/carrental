@@ -28,10 +28,6 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="surname" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            
             <column name="id_card_no" type="varchar(255)">
                 <constraints nullable="false" />
             </column>

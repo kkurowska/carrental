@@ -45,10 +45,26 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="carrentalApp.rent.rent_date" for="field_rent_date">Rent Date</label>
+                <div class="input-group">
+                    <input id="field_rent_date" type="text" class="form-control" name="rent_date" uib-datepicker-popup="{{dateformat}}" ng-model="vm.rent.rent_date" is-open="vm.datePickerOpenStatus.rent_date"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('rent_date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.rent_date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.rent_date.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
 
         <div class="form-group">
             <label data-translate="carrentalApp.rent.car" for="field_car">Car</label>
-            <select class="form-control" id="field_car" name="car" ng-model="vm.rent.car" ng-options="car as car.id for car in vm.cars track by car.id" required>
+            <select class="form-control" id="field_car" name="car" ng-model="vm.rent.car" ng-options="car as car.registration_no for car in vm.cars track by car.id" required>
                 <option value=""></option>
             </select>
         </div>
@@ -60,7 +76,7 @@
         </div>
         <div class="form-group">
             <label data-translate="carrentalApp.rent.customer" for="field_customer">Customer</label>
-            <select class="form-control" id="field_customer" name="customer" ng-model="vm.rent.customer" ng-options="customer as customer.id for customer in vm.customers track by customer.id" required>
+            <select class="form-control" id="field_customer" name="customer" ng-model="vm.rent.customer" ng-options="customer as customer.name for customer in vm.customers track by customer.id" required>
                 <option value=""></option>
             </select>
         </div>
@@ -72,15 +88,9 @@
         </div>
         <div class="form-group">
             <label data-translate="carrentalApp.rent.employee" for="field_employee">Employee</label>
-            <select class="form-control" id="field_employee" name="employee" ng-model="vm.rent.employee" ng-options="user as user.id for user in vm.users track by user.id" required>
+            <select class="form-control" id="field_employee" name="employee" ng-model="vm.rent.employee" ng-options="user as user.login for user in vm.users track by user.id">
                 <option value=""></option>
             </select>
-        </div>
-        <div ng-show="editForm.employee.$invalid">
-            <p class="help-block"
-                ng-show="editForm.employee.$error.required" data-translate="entity.validation.required">
-                This field is required.
-            </p>
         </div>
     </div>
     <div class="modal-footer">

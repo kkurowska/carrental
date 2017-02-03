@@ -32,6 +32,10 @@
                 <constraints nullable="false" />
             </column>
             
+            <column name="rent_date" type="date">
+                <constraints nullable="false" />
+            </column>
+            
             <column name="car_id" type="bigint">
                 <constraints nullable="false" />
             </column>
@@ -41,7 +45,7 @@
             </column>
 
             <column name="employee_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

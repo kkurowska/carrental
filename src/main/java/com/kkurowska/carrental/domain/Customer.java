@@ -27,10 +27,6 @@ public class Customer implements Serializable {
     private String name;
 
     @NotNull
-    @Column(name = "surname", nullable = false)
-    private String surname;
-
-    @NotNull
     @Column(name = "id_card_no", nullable = false)
     private String id_card_no;
 
@@ -57,19 +53,6 @@ public class Customer implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public Customer surname(String surname) {
-        this.surname = surname;
-        return this;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getId_card_no() {
@@ -123,7 +106,6 @@ public class Customer implements Serializable {
         return "Customer{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", surname='" + surname + "'" +
             ", id_card_no='" + id_card_no + "'" +
             ", phone_no='" + phone_no + "'" +
             '}';

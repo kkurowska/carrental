@@ -41,9 +41,6 @@ public class CustomerResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_SURNAME = "AAAAAAAAAA";
-    private static final String UPDATED_SURNAME = "BBBBBBBBBB";
-
     private static final String DEFAULT_ID_CARD_NO = "AAAAAAAAAA";
     private static final String UPDATED_ID_CARD_NO = "BBBBBBBBBB";
 
@@ -88,7 +85,6 @@ public class CustomerResourceIntTest {
     public static Customer createEntity(EntityManager em) {
         Customer customer = new Customer()
                 .name(DEFAULT_NAME)
-                .surname(DEFAULT_SURNAME)
                 .id_card_no(DEFAULT_ID_CARD_NO)
                 .phone_no(DEFAULT_PHONE_NO);
         return customer;
@@ -116,7 +112,6 @@ public class CustomerResourceIntTest {
         assertThat(customerList).hasSize(databaseSizeBeforeCreate + 1);
         Customer testCustomer = customerList.get(customerList.size() - 1);
         assertThat(testCustomer.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testCustomer.getSurname()).isEqualTo(DEFAULT_SURNAME);
         assertThat(testCustomer.getId_card_no()).isEqualTo(DEFAULT_ID_CARD_NO);
         assertThat(testCustomer.getPhone_no()).isEqualTo(DEFAULT_PHONE_NO);
     }
@@ -147,24 +142,6 @@ public class CustomerResourceIntTest {
         int databaseSizeBeforeTest = customerRepository.findAll().size();
         // set the field null
         customer.setName(null);
-
-        // Create the Customer, which fails.
-
-        restCustomerMockMvc.perform(post("/api/customers")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(customer)))
-            .andExpect(status().isBadRequest());
-
-        List<Customer> customerList = customerRepository.findAll();
-        assertThat(customerList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkSurnameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = customerRepository.findAll().size();
-        // set the field null
-        customer.setSurname(null);
 
         // Create the Customer, which fails.
 
@@ -225,7 +202,6 @@ public class CustomerResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(customer.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME.toString())))
             .andExpect(jsonPath("$.[*].id_card_no").value(hasItem(DEFAULT_ID_CARD_NO.toString())))
             .andExpect(jsonPath("$.[*].phone_no").value(hasItem(DEFAULT_PHONE_NO.toString())));
     }
@@ -242,7 +218,6 @@ public class CustomerResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(customer.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME.toString()))
             .andExpect(jsonPath("$.id_card_no").value(DEFAULT_ID_CARD_NO.toString()))
             .andExpect(jsonPath("$.phone_no").value(DEFAULT_PHONE_NO.toString()));
     }
@@ -267,7 +242,6 @@ public class CustomerResourceIntTest {
         Customer updatedCustomer = customerRepository.findOne(customer.getId());
         updatedCustomer
                 .name(UPDATED_NAME)
-                .surname(UPDATED_SURNAME)
                 .id_card_no(UPDATED_ID_CARD_NO)
                 .phone_no(UPDATED_PHONE_NO);
 
@@ -281,7 +255,6 @@ public class CustomerResourceIntTest {
         assertThat(customerList).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customerList.get(customerList.size() - 1);
         assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testCustomer.getSurname()).isEqualTo(UPDATED_SURNAME);
         assertThat(testCustomer.getId_card_no()).isEqualTo(UPDATED_ID_CARD_NO);
         assertThat(testCustomer.getPhone_no()).isEqualTo(UPDATED_PHONE_NO);
     }

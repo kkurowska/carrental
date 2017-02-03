@@ -8,7 +8,7 @@
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "id"
+            "otherEntityField": "registration_no"
         },
         {
             "relationshipName": "customer",
@@ -17,16 +17,13 @@
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         },
         {
             "relationshipName": "employee",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "id",
+            "otherEntityField": "login",
             "ownerSide": true
         }
     ],
@@ -41,6 +38,13 @@
         {
             "fieldName": "deposit",
             "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "rent_date",
+            "fieldType": "LocalDate",
             "fieldValidateRules": [
                 "required"
             ]

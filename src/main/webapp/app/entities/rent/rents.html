@@ -21,9 +21,10 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="price"><span data-translate="carrentalApp.rent.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="deposit"><span data-translate="carrentalApp.rent.deposit">Deposit</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="car.id"><span data-translate="carrentalApp.rent.car">Car</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="customer.id"><span data-translate="carrentalApp.rent.customer">Customer</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="employee.id"><span data-translate="carrentalApp.rent.employee">Employee</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="rent_date"><span data-translate="carrentalApp.rent.rent_date">Rent Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="car.registration_no"><span data-translate="carrentalApp.rent.car">Car</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.name"><span data-translate="carrentalApp.rent.customer">Customer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="employee.login"><span data-translate="carrentalApp.rent.employee">Employee</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,14 +33,15 @@
                     <td><a ui-sref="rent-detail({id:rent.id})">{{rent.id}}</a></td>
                     <td>{{rent.price}}</td>
                     <td>{{rent.deposit}}</td>
+                        <td>{{rent.rent_date | date:'mediumDate'}}</td>
                     <td>
-                        <a ui-sref="car-detail({id:rent.car.id})">{{rent.car.id}}</a>
+                        <a ui-sref="car-detail({id:rent.car.id})">{{rent.car.registration_no}}</a>
                     </td>
                     <td>
-                        <a ui-sref="customer-detail({id:rent.customer.id})">{{rent.customer.id}}</a>
+                        <a ui-sref="customer-detail({id:rent.customer.id})">{{rent.customer.name}}</a>
                     </td>
                     <td>
-                        {{rent.employee.id}}
+                        {{rent.employee.login}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

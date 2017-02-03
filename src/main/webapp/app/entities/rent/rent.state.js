@@ -126,6 +126,7 @@
                             return {
                                 price: null,
                                 deposit: null,
+                                rent_date: null,
                                 id: null
                             };
                         }

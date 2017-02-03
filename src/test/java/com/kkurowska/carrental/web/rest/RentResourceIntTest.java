@@ -5,7 +5,6 @@ import com.kkurowska.carrental.CarrentalApp;
 import com.kkurowska.carrental.domain.Rent;
 import com.kkurowska.carrental.domain.Car;
 import com.kkurowska.carrental.domain.Customer;
-import com.kkurowska.carrental.domain.User;
 import com.kkurowska.carrental.repository.RentRepository;
 import com.kkurowska.carrental.service.RentService;
 
@@ -25,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -47,6 +48,9 @@ public class RentResourceIntTest {
 
     private static final BigDecimal DEFAULT_DEPOSIT = new BigDecimal(1);
     private static final BigDecimal UPDATED_DEPOSIT = new BigDecimal(2);
+
+    private static final LocalDate DEFAULT_RENT_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_RENT_DATE = LocalDate.now(ZoneId.systemDefault());
 
     @Inject
     private RentRepository rentRepository;
@@ -86,7 +90,8 @@ public class RentResourceIntTest {
     public static Rent createEntity(EntityManager em) {
         Rent rent = new Rent()
                 .price(DEFAULT_PRICE)
-                .deposit(DEFAULT_DEPOSIT);
+                .deposit(DEFAULT_DEPOSIT)
+                .rent_date(DEFAULT_RENT_DATE);
         // Add required entity
         Car car = CarResourceIntTest.createEntity(em);
         em.persist(car);
@@ -97,11 +102,6 @@ public class RentResourceIntTest {
         em.persist(customer);
         em.flush();
         rent.setCustomer(customer);
-        // Add required entity
-        User employee = UserResourceIntTest.createEntity(em);
-        em.persist(employee);
-        em.flush();
-        rent.setEmployee(employee);
         return rent;
     }
 
@@ -128,6 +128,7 @@ public class RentResourceIntTest {
         Rent testRent = rentList.get(rentList.size() - 1);
         assertThat(testRent.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testRent.getDeposit()).isEqualTo(DEFAULT_DEPOSIT);
+        assertThat(testRent.getRent_date()).isEqualTo(DEFAULT_RENT_DATE);
     }
 
     @Test
@@ -188,6 +189,24 @@ public class RentResourceIntTest {
 
     @Test
     @Transactional
+    public void checkRent_dateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = rentRepository.findAll().size();
+        // set the field null
+        rent.setRent_date(null);
+
+        // Create the Rent, which fails.
+
+        restRentMockMvc.perform(post("/api/rents")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(rent)))
+            .andExpect(status().isBadRequest());
+
+        List<Rent> rentList = rentRepository.findAll();
+        assertThat(rentList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllRents() throws Exception {
         // Initialize the database
         rentRepository.saveAndFlush(rent);
@@ -198,7 +217,8 @@ public class RentResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(rent.getId().intValue())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.intValue())))
-            .andExpect(jsonPath("$.[*].deposit").value(hasItem(DEFAULT_DEPOSIT.intValue())));
+            .andExpect(jsonPath("$.[*].deposit").value(hasItem(DEFAULT_DEPOSIT.intValue())))
+            .andExpect(jsonPath("$.[*].rent_date").value(hasItem(DEFAULT_RENT_DATE.toString())));
     }
 
     @Test
@@ -213,7 +233,8 @@ public class RentResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(rent.getId().intValue()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.intValue()))
-            .andExpect(jsonPath("$.deposit").value(DEFAULT_DEPOSIT.intValue()));
+            .andExpect(jsonPath("$.deposit").value(DEFAULT_DEPOSIT.intValue()))
+            .andExpect(jsonPath("$.rent_date").value(DEFAULT_RENT_DATE.toString()));
     }
 
     @Test
@@ -236,7 +257,8 @@ public class RentResourceIntTest {
         Rent updatedRent = rentRepository.findOne(rent.getId());
         updatedRent
                 .price(UPDATED_PRICE)
-                .deposit(UPDATED_DEPOSIT);
+                .deposit(UPDATED_DEPOSIT)
+                .rent_date(UPDATED_RENT_DATE);
 
         restRentMockMvc.perform(put("/api/rents")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -249,6 +271,7 @@ public class RentResourceIntTest {
         Rent testRent = rentList.get(rentList.size() - 1);
         assertThat(testRent.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testRent.getDeposit()).isEqualTo(UPDATED_DEPOSIT);
+        assertThat(testRent.getRent_date()).isEqualTo(UPDATED_RENT_DATE);
     }
 
     @Test

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -31,6 +32,10 @@ public class Rent implements Serializable {
     @Column(name = "deposit", precision=10, scale=2, nullable = false)
     private BigDecimal deposit;
 
+    @NotNull
+    @Column(name = "rent_date", nullable = false)
+    private LocalDate rent_date;
+
     @ManyToOne
     @NotNull
     private Car car;
@@ -40,7 +45,6 @@ public class Rent implements Serializable {
     private Customer customer;
 
     @ManyToOne
-    @NotNull
     private User employee;
 
     public Long getId() {
@@ -75,6 +79,19 @@ public class Rent implements Serializable {
 
     public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
+    }
+
+    public LocalDate getRent_date() {
+        return rent_date;
+    }
+
+    public Rent rent_date(LocalDate rent_date) {
+        this.rent_date = rent_date;
+        return this;
+    }
+
+    public void setRent_date(LocalDate rent_date) {
+        this.rent_date = rent_date;
     }
 
     public Car getCar() {
@@ -142,6 +159,7 @@ public class Rent implements Serializable {
             "id=" + id +
             ", price='" + price + "'" +
             ", deposit='" + deposit + "'" +
+            ", rent_date='" + rent_date + "'" +
             '}';
     }
 }

@@ -12,17 +12,21 @@
         <dd>
             <span>{{vm.rent.deposit}}</span>
         </dd>
+        <dt><span data-translate="carrentalApp.rent.rent_date">Rent Date</span></dt>
+        <dd>
+            <span>{{vm.rent.rent_date | date:'mediumDate'}}</span>
+        </dd>
         <dt><span data-translate="carrentalApp.rent.car">Car</span></dt>
         <dd>
-            <a ui-sref="car-detail({id:vm.rent.car.id})">{{vm.rent.car.id}}</a>
+            <a ui-sref="car-detail({id:vm.rent.car.id})">{{vm.rent.car.registration_no}}</a>
         </dd>
         <dt><span data-translate="carrentalApp.rent.customer">Customer</span></dt>
         <dd>
-            <a ui-sref="customer-detail({id:vm.rent.customer.id})">{{vm.rent.customer.id}}</a>
+            <a ui-sref="customer-detail({id:vm.rent.customer.id})">{{vm.rent.customer.name}}</a>
         </dd>
         <dt><span data-translate="carrentalApp.rent.employee">Employee</span></dt>
         <dd>
-            {{vm.rent.employee.id}}
+            {{vm.rent.employee.login}}
         </dd>
     </dl>
 

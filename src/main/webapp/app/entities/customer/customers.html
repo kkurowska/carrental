@@ -20,7 +20,6 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="carrentalApp.customer.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="surname"><span data-translate="carrentalApp.customer.surname">Surname</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="id_card_no"><span data-translate="carrentalApp.customer.id_card_no">Id Card No</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="phone_no"><span data-translate="carrentalApp.customer.phone_no">Phone No</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -30,7 +29,6 @@
                 <tr ng-repeat="customer in vm.customers track by customer.id">
                     <td><a ui-sref="customer-detail({id:customer.id})">{{customer.id}}</a></td>
                     <td>{{customer.name}}</td>
-                    <td>{{customer.surname}}</td>
                     <td>{{customer.id_card_no}}</td>
                     <td>{{customer.phone_no}}</td>
                     <td class="text-right">

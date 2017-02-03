@@ -18,6 +18,7 @@
             },
             "price": "Price",
             "deposit": "Deposit",
+            "rent_date": "Rent Date",
             "car": "Car",
             "customer": "Customer",
             "employee": "Employee"

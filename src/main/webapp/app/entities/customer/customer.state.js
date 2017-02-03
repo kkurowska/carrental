@@ -125,7 +125,6 @@
                         entity: function () {
                             return {
                                 name: null,
-                                surname: null,
                                 id_card_no: null,
                                 phone_no: null,
                                 id: null

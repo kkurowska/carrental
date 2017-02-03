@@ -17,7 +17,6 @@
                 "title": "Customer"
             },
             "name": "Name",
-            "surname": "Surname",
             "id_card_no": "Id Card No",
             "phone_no": "Phone No"
         }

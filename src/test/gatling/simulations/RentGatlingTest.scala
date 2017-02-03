@@ -67,7 +67,7 @@ class RentGatlingTest extends Simulation {
             .exec(http("Create new rent")
             .post("/api/rents")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "price":null, "deposit":null}""")).asJSON
+            .body(StringBody("""{"id":null, "price":null, "deposit":null, "rent_date":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_rent_url"))).exitHereIfFailed
             .pause(10)
