@@ -1,0 +1,74 @@
+<div>
+    <h2 data-translate="carrentalApp.rent.home.title">Rents</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="rent.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="carrentalApp.rent.home.createLabel">
+                        Create new Rent
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="price"><span data-translate="carrentalApp.rent.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="deposit"><span data-translate="carrentalApp.rent.deposit">Deposit</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="car.id"><span data-translate="carrentalApp.rent.car">Car</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.id"><span data-translate="carrentalApp.rent.customer">Customer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="employee.id"><span data-translate="carrentalApp.rent.employee">Employee</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="rent in vm.rents track by rent.id">
+                    <td><a ui-sref="rent-detail({id:rent.id})">{{rent.id}}</a></td>
+                    <td>{{rent.price}}</td>
+                    <td>{{rent.deposit}}</td>
+                    <td>
+                        <a ui-sref="car-detail({id:rent.car.id})">{{rent.car.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="customer-detail({id:rent.customer.id})">{{rent.customer.id}}</a>
+                    </td>
+                    <td>
+                        {{rent.employee.id}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="rent-detail({id:rent.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="rent.edit({id:rent.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="rent.delete({id:rent.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

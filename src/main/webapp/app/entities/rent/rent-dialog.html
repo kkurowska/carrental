@@ -1,0 +1,94 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myRentLabel" data-translate="carrentalApp.rent.home.createOrEditLabel">Create or edit a Rent</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.rent.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.rent.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="carrentalApp.rent.price" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                    ng-model="vm.rent.price"
+                    required />
+            <div ng-show="editForm.price.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.price.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.price.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="carrentalApp.rent.deposit" for="field_deposit">Deposit</label>
+            <input type="number" class="form-control" name="deposit" id="field_deposit"
+                    ng-model="vm.rent.deposit"
+                    required />
+            <div ng-show="editForm.deposit.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.deposit.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.deposit.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="carrentalApp.rent.car" for="field_car">Car</label>
+            <select class="form-control" id="field_car" name="car" ng-model="vm.rent.car" ng-options="car as car.id for car in vm.cars track by car.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.car.$invalid">
+            <p class="help-block"
+                ng-show="editForm.car.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="carrentalApp.rent.customer" for="field_customer">Customer</label>
+            <select class="form-control" id="field_customer" name="customer" ng-model="vm.rent.customer" ng-options="customer as customer.id for customer in vm.customers track by customer.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.customer.$invalid">
+            <p class="help-block"
+                ng-show="editForm.customer.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="carrentalApp.rent.employee" for="field_employee">Employee</label>
+            <select class="form-control" id="field_employee" name="employee" ng-model="vm.rent.employee" ng-options="user as user.id for user in vm.users track by user.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.employee.$invalid">
+            <p class="help-block"
+                ng-show="editForm.employee.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

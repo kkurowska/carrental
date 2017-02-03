@@ -1,0 +1,26 @@
+{
+    "carrentalApp": {
+        "rent" : {
+            "home": {
+                "title": "Rents",
+                "createLabel": "Dodaj Rent",
+                "createOrEditLabel": "Dodaj lub edytuj: Rent",
+                "search": "Search for Rent"
+            },
+            "created": "A new Rent is created with identifier {{ param }}",
+            "updated": "A Rent is updated with identifier {{ param }}",
+            "deleted": "A Rent is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Rent {{ id }}?"
+            },
+            "detail": {
+                "title": "Rent"
+            },
+            "price": "Price",
+            "deposit": "Deposit",
+            "car": "Car",
+            "customer": "Customer",
+            "employee": "Employee"
+        }
+    }
+}

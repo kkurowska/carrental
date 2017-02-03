@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="carrentalApp.rent.detail.title">Rent</span> {{vm.rent.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="carrentalApp.rent.price">Price</span></dt>
+        <dd>
+            <span>{{vm.rent.price}}</span>
+        </dd>
+        <dt><span data-translate="carrentalApp.rent.deposit">Deposit</span></dt>
+        <dd>
+            <span>{{vm.rent.deposit}}</span>
+        </dd>
+        <dt><span data-translate="carrentalApp.rent.car">Car</span></dt>
+        <dd>
+            <a ui-sref="car-detail({id:vm.rent.car.id})">{{vm.rent.car.id}}</a>
+        </dd>
+        <dt><span data-translate="carrentalApp.rent.customer">Customer</span></dt>
+        <dd>
+            <a ui-sref="customer-detail({id:vm.rent.customer.id})">{{vm.rent.customer.id}}</a>
+        </dd>
+        <dt><span data-translate="carrentalApp.rent.employee">Employee</span></dt>
+        <dd>
+            {{vm.rent.employee.id}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="rent-detail.edit({id:vm.rent.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

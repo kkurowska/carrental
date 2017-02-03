@@ -1,0 +1,25 @@
+{
+    "carrentalApp": {
+        "customer" : {
+            "home": {
+                "title": "Customers",
+                "createLabel": "Dodaj Customer",
+                "createOrEditLabel": "Dodaj lub edytuj: Customer",
+                "search": "Search for Customer"
+            },
+            "created": "A new Customer is created with identifier {{ param }}",
+            "updated": "A Customer is updated with identifier {{ param }}",
+            "deleted": "A Customer is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Customer {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer"
+            },
+            "name": "Name",
+            "surname": "Surname",
+            "id_card_no": "Id Card No",
+            "phone_no": "Phone No"
+        }
+    }
+}
